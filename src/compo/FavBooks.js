@@ -18,9 +18,8 @@ class Wether extends React.Component {
                               <Card.Text>
                                 {value.title} <br></br>
                                 {value.description}
-                                
                               </Card.Text>
-                              
+
                               {/* <Button variant="primary">Go somewhere</Button> */}
                             </Card.Body>
                           </Card>
