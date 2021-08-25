@@ -2,20 +2,38 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import BookFormEdite from './BookFormEdite';
 
 
 
 class FavBooks extends React.Component {
+  constructor(props) {
+    super(props)
 
-  
-  removebook=async(bookid)=>{
-    // console.log(bookid)
+    this.state = {
+     
+      showeditform:false,
+      
+
+    }
+  }
+  handleShow = () =>  this.setState({
+    show: this.state.showeditform = true
+  });
+   handleClose = () =>   this.setState({
+    show: this.state.showeditform = false
+  });
+removebook=async(bookid)=>{
     let bookInfo = await axios.delete(`${process.env.REACT_APP_PORT}/removebook/${bookid}?user=${this.props.email}`)
     this.props.updatedata(bookInfo.data)
-
 }
-
     
+  updateshow=async (e)=>{
+    e.preventDefault();
+   this.handleShow()
+   console.log('hi');
+  }
+  
     render() {
         return (
             <>
@@ -35,16 +53,26 @@ class FavBooks extends React.Component {
                                 {value.title} <br></br>
                                 {value.description}
                               </Card.Text>
-
                               <Button onClick={()=>{this.removebook(id)}} variant="primary">delete</Button>
+                              <Button onClick={this.updateshow} variant="primary">Update</Button>
                             
                             </Card.Body>
                             
                           </Card>
+                          
 
                         )
                     })
+
                 }
+      <BookFormEdite
+      handleShow = {this.handleShow}
+      showeditform={this.state.showeditform}
+      handleClose = {this.handleClose}
+      email={this.props.email}
+      updatedata={this.props.updatedata}
+     
+      />
             </>
         )
     }

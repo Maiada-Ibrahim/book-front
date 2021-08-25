@@ -83,9 +83,10 @@ updatedata=async(data)=>{
         </p>
       </Jumbotron>
         <button onClick={this.addbook}>Add book </button>
-      <FavBooks booksarr={this.state.booksarr}
-                email={this.state.email}
-                updatedata={this.updatedata}
+       <FavBooks booksarr={this.state.booksarr}
+                 email={this.state.email}
+                 updatedata={this.updatedata}
+                 
       
       />
 
