@@ -14,7 +14,8 @@ class MyFavoriteBooks extends React.Component {
     this.state = {
       booksarr: [],
       email: '',
-      show:false
+      show:false,
+      id:''
 
     }
   }
@@ -62,14 +63,16 @@ class MyFavoriteBooks extends React.Component {
     console.log(this.state.email)
     let url =`${process.env.REACT_APP_PORT}/book?email=${this.state.email}`;
     let responseData = await axios.get(url);
-    await this.setState({
-      booksarr: responseData.data,
-    })
-    // console.log(this.state.booksarr)
+    this.updatedata(responseData.data)
 
-    
   }
+updatedata=async(data)=>{
+  await this.setState({
+    booksarr:data ,
+  })
 
+
+}
   render() {
     return(
       <div>
@@ -80,14 +83,19 @@ class MyFavoriteBooks extends React.Component {
         </p>
       </Jumbotron>
         <button onClick={this.addbook}>Add book </button>
-      <FavBooks FavBooks={this.state.booksarr} />
+      <FavBooks booksarr={this.state.booksarr}
+                email={this.state.email}
+                updatedata={this.updatedata}
+      
+      />
 
       <BookFormModal
       handleShow = {this.handleShow}
-      show={this.state.show}
       handleClose = {this.handleClose}
       email={this.state.email}
-      // addbookfromform={this.addbookfromform}
+      show={this.state.show}
+      updatedata={this.updatedata}
+     
       />
       </div>
     )
