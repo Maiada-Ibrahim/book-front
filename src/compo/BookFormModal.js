@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 
+
 class BookFormModal extends React.Component {
     constructor(props) {
       super(props);
@@ -30,8 +31,10 @@ class BookFormModal extends React.Component {
         let bookInfoData = await axios.post(`${process.env.REACT_APP_PORT}/addbookfromform`,bookInfo)
         this.setState({
             bookdata: bookInfoData.data
-        })
-        console.log(this.state.bookdata)
+          })
+          this.props.updatedata(bookInfoData.data)
+          this.props.handleClose()
+     
       }
    
       
@@ -60,6 +63,7 @@ class BookFormModal extends React.Component {
                 Close
               </Button>
             </Modal>
+           
           </div>
         );
     
