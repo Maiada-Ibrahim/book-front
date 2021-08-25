@@ -30,29 +30,8 @@ class MyFavoriteBooks extends React.Component {
   addbook=async (e)=>{
     e.preventDefault();
    this.handleShow()
-   console.log('hi');
   }
   
-  // addbookfromform=async(e)=>{
-  //   e.preventDefault();
-  //   // let catName= e.target.catName.value;
-  //   // let catBreed= e.target.catBreed.value;
-  //   let catInfo = {
-  //     catName:e.target.catName.value,
-  //     catBreed: e.target.catBreed.value,
-  //     email: this.state.email
-  //   }
-
-  //   // let catInfoData = await axios.get(`${process.env.REACT_APP_SERVER}/addCat`,{params:catInfo})
-  //   let catInfoData = await axios.post(`${process.env.REACT_APP_SERVER}/addCat`,catInfo)
-  //   this.setState({
-  //     cats: catInfoData.data
-  //   })
-
-  // }
-    
-  
-  //-----------------------------------------------
   componentDidMount = async () => {
     const { user } = this.props.auth0;
 
