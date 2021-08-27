@@ -39,7 +39,7 @@ class FavBooks extends React.Component {
         return (
             <>
                 
-                {   console.log(this.props.booksarr),
+                {   
                     this.props.booksarr.map((value ,index)=> {
                        let key=value._id
                        let id=value._id
