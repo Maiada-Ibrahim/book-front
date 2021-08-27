@@ -13,7 +13,6 @@ class FavBooks extends React.Component {
     this.state = {
      
       showeditform:false,
-      infofbook:''
       
 
     }
@@ -24,15 +23,15 @@ class FavBooks extends React.Component {
    handleClose = () =>   this.setState({
     show: this.state.showeditform = false
   });
- removebook=async(bookid)=>{
+removebook=async(bookid)=>{
     let bookInfo = await axios.delete(`${process.env.REACT_APP_PORT}/removebook/${bookid}?user=${this.props.email}`)
     this.props.updatedata(bookInfo.data)
-}   
-  updateshow=async (bookneededite)=>{
+}
+    
+  updateshow=async (e)=>{
+    e.preventDefault();
    this.handleShow()
-   this.setState({
-    infofbook: this.state.infofbook = bookneededite
-  })
+   console.log('hi');
   }
   
     render() {
@@ -43,7 +42,6 @@ class FavBooks extends React.Component {
                     this.props.booksarr.map((value ,index)=> {
                        let key=value._id
                        let id=value._id
-                       let bookneededite=value
                       //  console.log(id)
                         return (
 
@@ -56,7 +54,7 @@ class FavBooks extends React.Component {
                                 {value.description}
                               </Card.Text>
                               <Button onClick={()=>{this.removebook(id)}} variant="primary">delete</Button>
-                              <Button onClick={()=>{this.updateshow(bookneededite)}} variant="primary">Update</Button>
+                              <Button onClick={this.updateshow} variant="primary">Update</Button>
                             
                             </Card.Body>
                             
@@ -70,7 +68,6 @@ class FavBooks extends React.Component {
       <BookFormEdite
       handleShow = {this.handleShow}
       showeditform={this.state.showeditform}
-      infofbook={this.state.infofbook}
       handleClose = {this.handleClose}
       email={this.props.email}
       updatedata={this.props.updatedata}
