@@ -12,7 +12,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import LoginButton from './compo/LoginButton';
+// import LoginButton from './compo/LoginButton';
 
 class App extends React.Component {
 
