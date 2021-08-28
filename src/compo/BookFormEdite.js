@@ -14,6 +14,18 @@ class BookFormEdite extends React.Component {
         
       };
   
+
+  updatebookfromform = async (e) => {
+    console.log('jjjjjjjjjjjjjj')
+    e.preventDefault();
+
+    let title= e.target.title.value;
+    console.log(title)
+    let bookInformation = {
+        title: e.target.title.value,
+        description: e.target. description.value,
+        email: this.props.email
+
     }
 
     updatebookfromform=async(e)=>{
