@@ -45,7 +45,7 @@ class BookFormEdite extends React.Component {
         {/* <Modal show={this.props.show} onClick={this.props.handleClose} > */}
         <Modal show={this.props.showeditform}  >
 
-          {/* {this.giveMeTunahandleShow} */}
+          
           <Modal.Header closeButton>
             <Modal.Title>update</Modal.Title>
           </Modal.Header>
