@@ -21,6 +21,7 @@ class BookFormEdite extends React.Component {
     e.preventDefault();
 
     let title= e.target.title.value;
+    console.log(title)
     let bookInformation = {
         title: e.target.title.value,
         description: e.target. description.value,

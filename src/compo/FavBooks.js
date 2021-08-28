@@ -13,7 +13,7 @@ class FavBooks extends React.Component {
     this.state = {
      
       showeditform:false,
-      infofbook:''
+      infofbook:[]
       
 
     }
