@@ -21,7 +21,6 @@ class BookFormEdite extends React.Component {
     e.preventDefault();
 
     let title= e.target.title.value;
-    console.log(title)
     let bookInformation = {
         title: e.target.title.value,
         description: e.target. description.value,
@@ -45,7 +44,7 @@ class BookFormEdite extends React.Component {
         {/* <Modal show={this.props.show} onClick={this.props.handleClose} > */}
         <Modal show={this.props.showeditform}  >
 
-          
+          {/* {this.giveMeTunahandleShow} */}
           <Modal.Header closeButton>
             <Modal.Title>update</Modal.Title>
           </Modal.Header>
