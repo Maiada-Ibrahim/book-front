@@ -13,8 +13,6 @@ class FavBooks extends React.Component {
     this.state = {
      
       showeditform:false,
-      infofbook:[],
-
       
 
     }
@@ -40,7 +38,7 @@ removebook=async(bookid)=>{
         return (
             <>
                 
-                {   
+                {   console.log(this.props.booksarr),
                     this.props.booksarr.map((value ,index)=> {
                        let key=value._id
                        let id=value._id
