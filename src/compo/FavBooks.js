@@ -13,6 +13,7 @@ class FavBooks extends React.Component {
     this.state = {
      
       showeditform:false,
+      infofbook:''
       
 
     }
@@ -28,10 +29,12 @@ removebook=async(bookid)=>{
     this.props.updatedata(bookInfo.data)
 }
     
-  updateshow=async (e)=>{
-    e.preventDefault();
+updateshow=async (bookneededite)=>{
+    
    this.handleShow()
-   console.log('hi');
+   this.setState({
+    infofbook: this.state.infofbook = bookneededite
+  })
   }
   
     render() {
@@ -42,7 +45,7 @@ removebook=async(bookid)=>{
                     this.props.booksarr.map((value ,index)=> {
                        let key=value._id
                        let id=value._id
-                      //  console.log(id)
+                       let bookneededite=value
                         return (
 
                             <Card  style={{ width: '25rem' },{ width: '15rem' } }>
@@ -54,8 +57,7 @@ removebook=async(bookid)=>{
                                 {value.description}
                               </Card.Text>
                               <Button onClick={()=>{this.removebook(id)}} variant="primary">delete</Button>
-                              <Button onClick={this.updateshow} variant="primary">Update</Button>
-                            
+                              <Button onClick={()=>{this.updateshow(bookneededite)}} variant="primary">Update</Button>                            
                             </Card.Body>
                             
                           </Card>
@@ -71,6 +73,7 @@ removebook=async(bookid)=>{
       handleClose = {this.handleClose}
       email={this.props.email}
       updatedata={this.props.updatedata}
+      infofbook={this.state.infofbook}
      
       />
             </>
