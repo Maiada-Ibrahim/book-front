@@ -1,106 +1,107 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import './BestBooks.css';
+import React from 'react'
 import { withAuth0 } from '@auth0/auth0-react';
-import axios from 'axios'
-import FavBooks from './compo/FavBooks'
-import BookFormModal from './compo/BookFormModal';
+import CardRende from './compo/CardRende';
+import { Card, Button, Form } from 'react-bootstrap'
+import MyFav from './compo/MyFav';
+const axios = require('axios')
 
-class MyFavoriteBooks extends React.Component {
+
+
+class BestBooks extends React.Component {
   constructor(props) {
-    super(props)
-
+    super(props);
     this.state = {
-      booksarr: [],
-      email: '',
-      show:false,
-      id:''
+      email: "",
+      alldata: [],
+      showcard: false,
+      showprofile:false,
+      userfavdata:[]
 
-    }
+    };
   }
-  handleClose = () =>   this.setState({
-    show: this.state.show = false
-  });
-  handleShow = () =>  this.setState({
-    show: this.state.show = true
-  });
+  // componentDidMount = async () => {
+  //   const { user } = this.props.auth0;
 
-
-  addbook=async (e)=>{
-    e.preventDefault();
-   this.handleShow()
-   console.log('hi');
-  }
-  
-  // addbookfromform=async(e)=>{
-  //   e.preventDefault();
-  //   // let catName= e.target.catName.value;
-  //   // let catBreed= e.target.catBreed.value;
-  //   let catInfo = {
-  //     catName:e.target.catName.value,
-  //     catBreed: e.target.catBreed.value,
-  //     email: this.state.email
-  //   }
-
-  //   // let catInfoData = await axios.get(`${process.env.REACT_APP_SERVER}/addCat`,{params:catInfo})
-  //   let catInfoData = await axios.post(`${process.env.REACT_APP_SERVER}/addCat`,catInfo)
-  //   this.setState({
-  //     cats: catInfoData.data
+  //   await this.setState({
+  //   email: `${user.email}`
   //   })
-
   // }
-    
-  
-  //-----------------------------------------------
-  componentDidMount = async () => {
+  componentDidMount() {
     const { user } = this.props.auth0;
 
-    await this.setState({
-    email: `${user.email}`
+    this.setState({
+      email: `${user.email}`
     })
 
-    console.log(this.state.email)
-    let url =`${process.env.REACT_APP_PORT}/book?email=${this.state.email}`;
-    let responseData = await axios.get(url);
-    this.updatedata(responseData.data)
-
   }
-updatedata=async(data)=>{
-  await this.setState({
-    booksarr:data ,
-  })
+  getalldata = async (event) => {
+    event.preventDefault();
+    let search = event.target.cardread.value
+    console.log(search)
 
+    let url = `http://localhost:3001/getalldata?search=${search}&email=${this.state.email}`;
+    let data = await axios.get(url);
+    await this.setState({
+      alldata: data.data,
+ showcard: true,
+    })
+    console.log(this.state.alldata)
+    
+  }
+  //---------------------------------------------------------------------------------add
+  adduserdata=async(element)=>{
+// event.preventDefault();
+let photoinf={
+title:element.title,
+thumb:element.thumb,
+alt_description:element.alt_description,
+email :this.state.email
+}
+
+let data= await axios.post(`http://localhost:3001/adduserdata`,photoinf)
+console.log(data.data)
+
+this.setState({
+  userfavdata: data.data
+})
+console.log(this.state.userfavdata)
 
 }
+//---------------------------------------------------------------------------------
   render() {
-    return(
+    return (
       <div>
-      <Jumbotron>
-        <h1>My Favorite Books</h1>
-        <p>
-          This is a collection of my favorite books
-        </p>
-      </Jumbotron>
-        <button onClick={this.addbook}>Add book </button>
-       <FavBooks booksarr={this.state.booksarr}
-                 email={this.state.email}
-                 updatedata={this.updatedata}
-                 
-      
-      />
+        <Form onSubmit={this.getalldata}     >
+          <Form.Group className="mb-3" controlId="formBasicEmail" >
+            <Form.Label>photo search</Form.Label>
+            <Form.Control type="tex" placeholder="photo need to search" name="cardread" />
+          </Form.Group>
+          <Button variant="primary" type="submit" >
+            search
+          </Button>
 
-      <BookFormModal
-      handleShow = {this.handleShow}
-      handleClose = {this.handleClose}
-      email={this.state.email}
-      show={this.state.show}
-      updatedata={this.updatedata}
-     
-      />
+        </Form>
+        {this.state.showcard &&
+          <CardRende
+            let alldata={this.state.alldata}
+            let adduserdata={this.adduserdata} 
+            
+          />}
+          {this.state.showprofile && 
+          <MyFav
+         
+          let userfavdata={this.state.userfavdata} 
+          let email={this.state.email} 
+
+          />
+          }
+
       </div>
     )
+
   }
 }
 
-export default withAuth0(MyFavoriteBooks);
+export default withAuth0(BestBooks)
+// export default BestBooks
+
