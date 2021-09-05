@@ -18,7 +18,7 @@ export class FavRender extends Component {
                                       {element.alt_description}
                                    </Card.Text>
                                    <Button variant="primary" onClick={()=>{this.props.delete(inf._id)}}>delete</Button>
-                                   <Button variant="primary" onClick={()=>{this.props.updat(inf._id)}}>update</Button>
+                                   <Button variant="primary" onClick={()=>{this.props.update(inf._id)}}>update</Button>
 
                                </Card.Body>
                            </Card>)
