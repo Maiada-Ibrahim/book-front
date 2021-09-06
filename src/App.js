@@ -6,13 +6,12 @@ import Login from './Login';
 import { withAuth0 } from '@auth0/auth0-react';
 import BestBooks from './BestBooks';
 import Profile from './compo/Profile';
-// import LoginButton from './compo/LoginButton';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-// import LoginButton from './compo/LoginButton';
+
 
 class App extends React.Component {
 
