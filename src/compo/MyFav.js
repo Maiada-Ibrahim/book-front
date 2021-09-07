@@ -12,7 +12,10 @@ class MyFav extends React.Component {
     this.state = {
       data: [],
       email: '',
-      showmodal:false
+      showmodal:false,
+      objinf:[],
+      secectedid:0
+
     };
   }
 
@@ -27,7 +30,7 @@ class MyFav extends React.Component {
       showmodal: true
     })
   };
-
+//---------------------------------------------------------------------------------------------------------
   componentDidMount = async () => {
     const { user } = this.props.auth0;
     await this.setState({
@@ -48,24 +51,25 @@ class MyFav extends React.Component {
     console.log(data.data)
   }
   //-----------------------------------------------------------------------------------------------
-  update = async (id) => {
+  update = async (inf) => {
     this.handleShow()
-    
+     let photoinf={
+      title:inf.title,
+      thumb:inf.thumb,
+      alt_description:inf.alt_description,
+      email :this.state.email,
+      _id:inf._id
+      }
+      await this.setState({
+        objinf: photoinf,
+      })
+    let id=this.state.objinf._id
+    let data = await axios.put(`http://localhost:3001/update/${id}`,photoinf);
+    console.log(data.data)
+    await this.setState({
+      data: data.data
+    })
   }
-//    doupdate=async(e,id)=>{
-//      console.log(id)
-//  let photoinf={
-//       title:e.target,
-//       thumb:element.thumb,
-//       alt_description:element.alt_description,
-//       email :this.state.email
-//       }
-//     let data = await axios.put(`http://localhost:3001/update/${id}`,);
-//     await this.setState({
-//       data: data.data
-//     })
-//     console.log(data.data)
-//   }
   render() {
     return (
 
@@ -79,6 +83,10 @@ class MyFav extends React.Component {
           < ModelUpdate  
           let showmodal={this.state.showmodal}
           let handleClose ={this.handleClose}
+          let objinf={this.state.objinf}
+          let update={this.update}
+          
+
         />
           
           

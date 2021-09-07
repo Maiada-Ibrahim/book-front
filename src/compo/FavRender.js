@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 
 
 export class FavRender extends Component {
+    
     render() {
         return (
             <div>
@@ -18,7 +19,7 @@ export class FavRender extends Component {
                                       {element.alt_description}
                                    </Card.Text>
                                    <Button variant="primary" onClick={()=>{this.props.delete(inf._id)}}>delete</Button>
-                                   <Button variant="primary" onClick={()=>{this.props.update(inf._id)}}>update</Button>
+                                   <Button variant="primary" onClick={()=>{this.props.update(inf)}}>update</Button>
 
                                </Card.Body>
                            </Card>)
