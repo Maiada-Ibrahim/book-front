@@ -5,39 +5,39 @@ import axios from 'axios'
 
 
 class BookFormEdite extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        
-        show: false,
-        bookdata:[]
-        
-      };
+  constructor(props) {
+    super(props);
+    this.state = {
 
-    }
-
-    updatebookfromform=async(e)=>{
-     console.log('jjjjjjjjjjjjjj')
-     e.preventDefault();
- 
-     let title= e.target.title.value;
-     let bookInformation = {
-         title: e.target.title.value,
-         description: e.target. description.value,
-         email: this.props.email
-     }
-     let bookid=`${this.props.infofbook._id}`
-     let bookInfo = await axios.put(`${process.env.REACT_APP_PORT}/updatebook/${bookid}`,bookInformation)
-       this.props.updatedata(bookInfo.data)
-       console.log(bookInformation)
- 
-       this.props.handleClose()
-   }
+      show: false,
+      bookdata: []
       
-   
-      
+    };
     
-   render() {
+  }
+  
+  updatebookfromform = async (e) => {
+    console.log('jjjjjjjjjjjjjj')
+    e.preventDefault();
+
+    let title= e.target.title.value;
+    let bookInformation = {
+        title: e.target.title.value,
+        description: e.target. description.value,
+        email: this.props.email
+    }
+    // let catsData = await axios.put(`${process.env.REACT_APP_SERVER}/updateCat/${catID}`, catData);
+    let bookid=`${this.props.infofbook._id}`
+    let bookInfo = await axios.put(`${process.env.REACT_APP_PORT}/updatebook/${bookid}`,bookInformation)
+      this.props.updatedata(bookInfo.data)
+      console.log(bookInformation)
+
+      this.props.handleClose()
+  }
+
+
+
+  render() {
 
     return (
       <div>
